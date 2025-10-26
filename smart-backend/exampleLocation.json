@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Торгово-развлекательный центр Ала-Тоо",
+    "address": "г. Бишкек, проспект Чуй, 135",
+    "logo": "https://picsum.photos/seed/alatoo/200"
+  },
+  {
+    "id": 2,
+    "title": "Бизнес-парк Ордо",
+    "address": "г. Бишкек, улица Исанова, 98",
+    "logo": "https://picsum.photos/seed/ordo/200"
+  },
+  {
+    "id": 3,
+    "title": "Жилой комплекс Горный Ветер",
+    "address": "г. Бишкек, улица Ахунбаева, 244",
+    "logo": "https://picsum.photos/seed/mountain/200"
+  },
+  {
+    "id": 4,
+    "title": "Индустриальная зона Кара-Балта",
+    "address": "г. Кара-Балта, промышленный район, 3А",
+    "logo": "https://picsum.photos/seed/karabalta/200"
+  },
+  {
+    "id": 5,
+    "title": "Парковочный комплекс Аэропорт Манас",
+    "address": "Международный аэропорт Манас, г. Бишкек",
+    "logo": "https://picsum.photos/seed/manas/200"
+  },
+  {
+    "id": 6,
+    "title": "Спортивный комплекс Ак-Босого",
+    "address": "г. Бишкек, микрорайон Ак-Босого, улица Суюмбаева, 45",
+    "logo": "https://picsum.photos/seed/akbosogo/200"
+  },
+  {
+    "id": 7,
+    "title": "Автосервисный центр АвтоЛайн",
+    "address": "г. Бишкек, улица Юнусалиева, 11",
+    "logo": "https://picsum.photos/seed/autoline/200"
+  },
+  {
+    "id": 8,
+    "title": "Отель Плаза Бишкек",
+    "address": "г. Бишкек, улица Тоголок Молдо, 52",
+    "logo": "https://picsum.photos/seed/plaza/200"
+  },
+  {
+    "id": 9,
+    "title": "Ботанический сад им. Г. Аитиева",
+    "address": "г. Бишкек, проспект Мира, 90",
+    "logo": "https://picsum.photos/seed/botanic/200"
+  },
+  {
+    "id": 10,
+    "title": "Торговый центр Азия Молл",
+    "address": "г. Бишкек, проспект Мира, 150",
+    "logo": "https://picsum.photos/seed/asiamall/200"
+  }
+]

@@ -1,0 +1,46 @@
+# Build stage
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Install dependencies (including dev for build)
+COPY package*.json ./
+RUN npm install
+
+# Copy source and build
+COPY . .
+RUN npm run build
+
+# Compile the seed script
+RUN npx tsc src/database/seed.ts --outDir dist --lib es2020 --module commonjs --esModuleInterop --skipLibCheck --strict false
+
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install bash (needed for entrypoint script)
+RUN apk add --no-cache bash
+
+# Install only production dependencies
+COPY package*.json ./
+RUN npm install --omit=dev
+
+# Copy built application from builder
+COPY --from=builder /app/dist ./dist
+
+# Copy entrypoint script and source files for db scripts to work
+COPY entrypoint.prod.sh .
+COPY src ./src
+
+# Copy drizzle config for migrations
+COPY drizzle.config.ts .
+COPY tsconfig.json .
+
+RUN chmod +x entrypoint.prod.sh
+
+# Expose port
+EXPOSE 3000
+
+# Start production application with entrypoint for DB setup
+ENTRYPOINT ["./entrypoint.prod.sh"]

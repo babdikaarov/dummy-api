@@ -1,0 +1,44 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: ololo-gate-app-dev
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env.development
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    command: air -c .air.toml
+    networks:
+      - ololo-network
+    environment:
+      - ENV=development
+
+  db:
+    image: postgres:16-alpine
+    container_name: ololo-gate-db-dev
+    env_file:
+      - .env.development
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata_dev:/var/lib/postgresql/data
+    networks:
+      - ololo-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata_dev:
+
+networks:
+  ololo-network:
+    driver: bridge

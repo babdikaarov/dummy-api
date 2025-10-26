@@ -1,0 +1,1711 @@
+basePath: /
+definitions:
+  handlers.APIResponse:
+    properties:
+      data: {}
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
+  handlers.AdminDTO:
+    properties:
+      created_at:
+        example: "2025-01-15T10:30:00Z"
+        type: string
+      id:
+        example: 00000000-0000-0000-0000-000000000001
+        type: string
+      role:
+        example: super
+        type: string
+      updated_at:
+        example: "2025-01-15T10:30:00Z"
+        type: string
+      username:
+        example: admin
+        type: string
+    required:
+    - created_at
+    - id
+    - role
+    - updated_at
+    - username
+    type: object
+  handlers.AdminData:
+    properties:
+      id:
+        example: 550e8400-e29b-41d4-a716-446655440001
+        type: string
+      role:
+        example: regular
+        type: string
+      username:
+        example: newadmin
+        type: string
+    required:
+    - id
+    - role
+    - username
+    type: object
+  handlers.AdminDetailData:
+    properties:
+      created_at:
+        example: "2025-01-15T10:30:00Z"
+        type: string
+      id:
+        example: 00000000-0000-0000-0000-000000000001
+        type: string
+      role:
+        example: super
+        type: string
+      updated_at:
+        example: "2025-01-15T10:30:00Z"
+        type: string
+      username:
+        example: admin
+        type: string
+    type: object
+  handlers.AdminDetailResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handlers.AdminDetailData'
+      message:
+        example: Admin retrieved successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  handlers.AdminLoginData:
+    properties:
+      access_token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        type: string
+      id:
+        example: 00000000-0000-0000-0000-000000000001
+        type: string
+      role:
+        example: super
+        type: string
+      username:
+        example: admin
+        type: string
+    required:
+    - access_token
+    - id
+    - role
+    - username
+    type: object
+  handlers.AdminLoginRequest:
+    properties:
+      password:
+        example: admin
+        type: string
+      username:
+        example: admin
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  handlers.AdminLoginResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handlers.AdminLoginData'
+      message:
+        example: Login successful
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.AdminResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handlers.AdminData'
+      message:
+        example: Admin created successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.AdminsListResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/handlers.AdminDTO'
+        type: array
+      message:
+        example: Admins retrieved successfully
+        type: string
+      pagination:
+        $ref: '#/definitions/handlers.PaginationMeta'
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.AuditLogDetailResponse:
+    properties:
+      data:
+        $ref: '#/definitions/models.AdminAuditLog'
+      message:
+        example: Audit log retrieved successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  handlers.AvailableLocationsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/handlers.LocationDTO'
+        type: array
+      message:
+        example: Available locations retrieved successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.ContactDTO:
+    properties:
+      address:
+        example: г. Бишкек, проспект Чуй, 135
+        type: string
+      email_support:
+        example: support@ololo.com
+        type: string
+      support_number:
+        example: 77091234567
+        type: integer
+    type: object
+  handlers.ContactResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handlers.ContactDTO'
+      message:
+        example: Contact information retrieved successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.CreateAdminRequest:
+    properties:
+      password:
+        example: password123
+        minLength: 6
+        type: string
+      role:
+        description: '"super" or "regular"'
+        example: regular
+        type: string
+      username:
+        example: newadmin
+        type: string
+    required:
+    - password
+    - role
+    - username
+    type: object
+  handlers.CreateUserRequest:
+    properties:
+      locations:
+        description: Optional - if provided, will assign user to these locations and
+          gates
+        items:
+          $ref: '#/definitions/handlers.LocationAssignmentRequest'
+        type: array
+      password:
+        example: password123
+        minLength: 6
+        type: string
+      phone:
+        example: "+77771234567"
+        type: string
+    required:
+    - password
+    - phone
+    type: object
+  handlers.GateActionData:
+    properties:
+      gate_id:
+        example: 1
+        type: integer
+      status:
+        example: true
+        type: boolean
+    type: object
+  handlers.GateActionResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handlers.GateActionData'
+      message:
+        example: Gate operation completed successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.GateDTO:
+    properties:
+      description:
+        example: Main vehicle entrance for visitors. Controlled by biometric access,
+          opens in 3 seconds with safety sensors.
+        type: string
+      gate_is_horizontal:
+        example: true
+        type: boolean
+      id:
+        example: 1
+        type: integer
+      is_open:
+        example: true
+        type: boolean
+      location_id:
+        example: 1
+        type: integer
+      title:
+        example: Автоматический Шлагбаум №12
+        type: string
+    type: object
+  handlers.GatesListResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/handlers.GateDTO'
+        type: array
+      message:
+        example: Gates retrieved successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.HealthCheckResponse:
+    properties:
+      environment:
+        example: production
+        type: string
+      message:
+        example: Ololo Gate API is running
+        type: string
+      status:
+        example: healthy
+        type: string
+      success:
+        example: true
+        type: boolean
+      timestamp:
+        example: "2025-01-15T10:30:45Z"
+        type: string
+      uptime:
+        example: 1h30m45s
+        type: string
+      version:
+        example: 1.0.0
+        type: string
+    required:
+    - environment
+    - message
+    - status
+    - success
+    - timestamp
+    - uptime
+    - version
+    type: object
+  handlers.LocationAssignmentRequest:
+    properties:
+      gateIds:
+        items:
+          type: integer
+        type: array
+      locationId:
+        example: 1
+        type: integer
+    required:
+    - gateIds
+    - locationId
+    type: object
+  handlers.LocationDTO:
+    properties:
+      address:
+        example: г. Бишкек, проспект Чуй, 135
+        type: string
+      gates:
+        description: Always include gates, even if empty array
+        items:
+          $ref: '#/definitions/handlers.GateDTO'
+        type: array
+      id:
+        example: 1
+        type: integer
+      logo:
+        example: https://picsum.photos/seed/alatoo/200
+        type: string
+      title:
+        example: Торгово-развлекательный центр Ала-Тоо
+        type: string
+    type: object
+  handlers.LocationsListResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/handlers.LocationDTO'
+        type: array
+      message:
+        example: Locations retrieved successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.LoginData:
+    properties:
+      access_expires_in:
+        example: 900
+        type: integer
+      access_token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        type: string
+      id:
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+      phone:
+        example: "+77771234567"
+        type: string
+      refresh_expires_in:
+        example: 2592000
+        type: integer
+      refresh_token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        type: string
+    required:
+    - access_expires_in
+    - access_token
+    - id
+    - phone
+    - refresh_expires_in
+    - refresh_token
+    type: object
+  handlers.LoginRequest:
+    properties:
+      password:
+        example: password123
+        type: string
+      phone:
+        example: "+77771234567"
+        type: string
+    required:
+    - password
+    - phone
+    type: object
+  handlers.LoginResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handlers.LoginData'
+      message:
+        example: Login successful
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.PaginatedAuditLogResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/models.AdminAuditLog'
+        type: array
+      message:
+        example: Audit logs retrieved successfully
+        type: string
+      pagination:
+        $ref: '#/definitions/handlers.PaginationMeta'
+      success:
+        example: true
+        type: boolean
+    type: object
+  handlers.PaginationMeta:
+    properties:
+      current_page:
+        example: 1
+        type: integer
+      last_page:
+        example: 1
+        type: integer
+      per_page:
+        example: 100
+        type: integer
+      total:
+        example: 100
+        type: integer
+    type: object
+  handlers.PhoneAvailabilityResponse:
+    properties:
+      available:
+        description: true if phone is available, false if already in use
+        example: true
+        type: boolean
+      message:
+        example: Phone availability checked
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - available
+    - message
+    - success
+    type: object
+  handlers.RefreshData:
+    properties:
+      access_token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        type: string
+    required:
+    - access_token
+    type: object
+  handlers.RefreshRequest:
+    properties:
+      refresh_token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        type: string
+    required:
+    - refresh_token
+    type: object
+  handlers.RefreshResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handlers.RefreshData'
+      message:
+        example: Token refreshed successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.RegisterData:
+    properties:
+      id:
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+      phone:
+        example: "+77771234567"
+        type: string
+    required:
+    - id
+    - phone
+    type: object
+  handlers.RegisterRequest:
+    properties:
+      password:
+        example: password123
+        minLength: 6
+        type: string
+      phone:
+        example: "+77771234567"
+        type: string
+    required:
+    - password
+    - phone
+    type: object
+  handlers.RegisterResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handlers.RegisterData'
+      message:
+        example: User registered successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.UpdateAdminRequest:
+    properties:
+      password:
+        example: newpassword123
+        minLength: 6
+        type: string
+      role:
+        example: regular
+        type: string
+      username:
+        example: newusername
+        type: string
+    type: object
+  handlers.UpdateContactRequest:
+    properties:
+      address:
+        example: г. Бишкек, проспект Чуй, 135
+        type: string
+      email_support:
+        example: support@ololo.com
+        type: string
+      support_number:
+        example: 77091234567
+        type: integer
+    required:
+    - address
+    - email_support
+    - support_number
+    type: object
+  handlers.UpdateUserRequest:
+    properties:
+      locations:
+        description: Optional - if provided, will reassign user to these locations
+          and gates
+        items:
+          $ref: '#/definitions/handlers.LocationAssignmentRequest'
+        type: array
+      password:
+        description: Optional - only updates if provided
+        example: newpassword123
+        minLength: 6
+        type: string
+      phone:
+        description: Optional - if provided, will update phone number after checking
+          availability
+        example: "+77771234567"
+        type: string
+    type: object
+  handlers.UserDTO:
+    properties:
+      created_at:
+        example: "2025-01-15T10:30:00Z"
+        type: string
+      id:
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+      phone:
+        example: "+77771234567"
+        type: string
+      updated_at:
+        example: "2025-01-15T10:30:00Z"
+        type: string
+    required:
+    - created_at
+    - id
+    - phone
+    - updated_at
+    type: object
+  handlers.UserData:
+    properties:
+      id:
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+      phone:
+        example: "+77771234567"
+        type: string
+    required:
+    - id
+    - phone
+    type: object
+  handlers.UserDetailDTO:
+    properties:
+      created_at:
+        example: "2025-01-15T10:30:00Z"
+        type: string
+      id:
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+      locations:
+        items:
+          $ref: '#/definitions/handlers.LocationDTO'
+        type: array
+      phone:
+        example: "+77771234567"
+        type: string
+      updated_at:
+        example: "2025-01-15T10:30:00Z"
+        type: string
+    required:
+    - created_at
+    - id
+    - locations
+    - phone
+    - updated_at
+    type: object
+  handlers.UserDetailResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handlers.UserDetailDTO'
+      message:
+        example: User retrieved successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.UserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handlers.UserData'
+      message:
+        example: User created successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  handlers.UsersListResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/handlers.UserDTO'
+        type: array
+      message:
+        example: Users retrieved successfully
+        type: string
+      pagination:
+        $ref: '#/definitions/handlers.PaginationMeta'
+      success:
+        example: true
+        type: boolean
+    required:
+    - message
+    - success
+    type: object
+  models.AdminAuditLog:
+    properties:
+      action:
+        description: '"create_user", "update_user", "delete_user", "create_admin",
+          "delete_admin", "update_contact", etc.'
+        type: string
+      admin_id:
+        description: Who performed the action
+        type: string
+      admin_name:
+        description: Admin username for quick access (denormalized)
+        type: string
+      created_at:
+        type: string
+      details:
+        description: JSON with request details (what was changed)
+        type: string
+      error_message:
+        description: Error message if failed
+        type: string
+      id:
+        type: string
+      ip_address:
+        description: Request IP address
+        type: string
+      resource_id:
+        description: UUID or ID of affected resource
+        type: string
+      resource_type:
+        description: '"user", "admin", "contact", etc.'
+        type: string
+      status:
+        description: '"success" or "failed"'
+        type: string
+      user_agent:
+        description: Request user agent
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@ololo-gate.com
+    name: API Support
+  description: Secure phone-based authentication backend for Ololo Gate management
+    system with dual authentication (users & admins) and role-based access control.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: Ololo Gate API
+  version: "1.0"
+paths:
+  /:
+    get:
+      description: Check if the API server is running and retrieve detailed health
+        information including status, timestamp, uptime, and environment
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Health check successful
+          schema:
+            $ref: '#/definitions/handlers.HealthCheckResponse'
+      summary: Health check endpoint
+      tags:
+      - Health
+  /api/v1/admin/audit-logs:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve audit logs of admin actions (super admin only). Returns
+        paginated list of all administrative operations.
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 20
+        description: Items per page
+        in: query
+        name: limit
+        type: integer
+      - description: Filter by admin ID
+        in: query
+        name: admin_id
+        type: string
+      - description: Filter by action type
+        in: query
+        name: action
+        type: string
+      - description: Filter by resource type
+        in: query
+        name: resource_type
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Audit logs retrieved successfully
+          schema:
+            $ref: '#/definitions/handlers.PaginatedAuditLogResponse'
+        "401":
+          description: Unauthorized - invalid or missing admin token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "403":
+          description: Forbidden - super admin access required
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get admin audit logs
+      tags:
+      - Admin Audit Logs
+  /api/v1/admin/audit-logs/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a specific audit log entry by ID (super admin only)
+      parameters:
+      - description: Audit log ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Audit log retrieved successfully
+          schema:
+            $ref: '#/definitions/handlers.AuditLogDetailResponse'
+        "401":
+          description: Unauthorized - invalid or missing admin token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "403":
+          description: Forbidden - super admin access required
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "404":
+          description: Audit log not found
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get audit log by ID
+      tags:
+      - Admin Audit Logs
+  /api/v1/admin/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate admin with username and password, returns permanent
+        access token (no expiry)
+      parameters:
+      - description: Admin credentials
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.AdminLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Login successful with permanent token
+          schema:
+            $ref: '#/definitions/handlers.AdminLoginResponse'
+        "400":
+          description: Invalid request body or missing credentials
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Invalid credentials
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      summary: Admin login
+      tags:
+      - Admin Authentication
+  /api/v1/admin/users:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a list of all admin accounts with pagination, search,
+        filtering, and ordering (super admin only)
+      parameters:
+      - description: 'Page number (default: 1)'
+        in: query
+        name: page
+        type: integer
+      - description: 'Records per page (default: 500)'
+        in: query
+        name: limit
+        type: integer
+      - description: Search by username
+        in: query
+        name: search
+        type: string
+      - description: Filter by role (super or regular)
+        in: query
+        name: role
+        type: string
+      - description: 'Order results by created_at (ASC or DESC, default: DESC)'
+        in: query
+        name: order
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Admin users retrieved successfully
+          schema:
+            $ref: '#/definitions/handlers.AdminsListResponse'
+        "401":
+          description: Unauthorized - invalid or missing token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "403":
+          description: Forbidden - super admin access required
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get all admin users
+      tags:
+      - Admin User Management
+    post:
+      consumes:
+      - application/json
+      description: Create a new admin account with specified role (super admin only)
+      parameters:
+      - description: Admin creation details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateAdminRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Admin user created successfully
+          schema:
+            $ref: '#/definitions/handlers.AdminResponse'
+        "400":
+          description: Invalid request body or validation error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "403":
+          description: Forbidden - super admin access required
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "409":
+          description: Admin with this username already exists
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Create a new admin user
+      tags:
+      - Admin User Management
+  /api/v1/admin/users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an admin account by ID (soft delete, super admin only)
+      parameters:
+      - description: Admin ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Admin user deleted successfully
+          schema:
+            $ref: '#/definitions/handlers.AdminResponse'
+        "400":
+          description: Invalid admin ID format
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "403":
+          description: Forbidden - super admin access required
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "404":
+          description: Admin not found
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete an admin user
+      tags:
+      - Admin User Management
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a specific admin's details by ID. Super admins can retrieve
+        any admin. Regular admins can only retrieve their own details.
+      parameters:
+      - description: Admin ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Admin retrieved successfully
+          schema:
+            $ref: '#/definitions/handlers.AdminDetailResponse'
+        "400":
+          description: Invalid admin ID format
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "403":
+          description: Forbidden - regular admins can only access their own record
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "404":
+          description: Admin not found
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get admin by ID
+      tags:
+      - Admin User Management
+    patch:
+      consumes:
+      - application/json
+      description: Update an admin's details (password, username, and/or role). Super
+        admins can update any admin. Regular admins can only update their own password
+        and username (not role).
+      parameters:
+      - description: Admin ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update details (at least one field required)
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateAdminRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Admin updated successfully
+          schema:
+            $ref: '#/definitions/handlers.AdminResponse'
+        "400":
+          description: Invalid admin ID or request body
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "403":
+          description: Forbidden - insufficient permissions for this operation
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "404":
+          description: Admin not found
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update admin details
+      tags:
+      - Admin User Management
+  /api/v1/auth/check-phone:
+    get:
+      consumes:
+      - application/json
+      description: Check if a phone number is available for registration or account
+        creation (public endpoint, no authentication required)
+      parameters:
+      - description: Phone number in E.164 format (e.g., +77771234567)
+        in: query
+        name: phone
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Phone availability check result
+          schema:
+            $ref: '#/definitions/handlers.PhoneAvailabilityResponse'
+        "400":
+          description: Invalid phone number format
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      summary: Check if phone number is available for registration
+      tags:
+      - User Authentication
+  /api/v1/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate user with phone and password, returns access and refresh
+        tokens. Supports device-based token invalidation.
+      parameters:
+      - description: Unique device identifier (optional - if provided and different
+          from current device, previous tokens will be invalidated)
+        in: query
+        name: device_id
+        type: string
+      - description: Login credentials
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Login successful with tokens
+          schema:
+            $ref: '#/definitions/handlers.LoginResponse'
+        "400":
+          description: Invalid request body or phone format
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Invalid credentials
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      summary: User login
+      tags:
+      - User Authentication
+  /api/v1/auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Exchange a valid refresh token for a new access token
+      parameters:
+      - description: Refresh token
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.RefreshRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: New access token generated
+          schema:
+            $ref: '#/definitions/handlers.RefreshResponse'
+        "400":
+          description: Invalid request body
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Invalid or expired refresh token, or token has been invalidated
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      summary: Refresh access token
+      tags:
+      - User Authentication
+  /api/v1/auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user account with phone number and password (E.164
+        format required)
+      parameters:
+      - description: Registration details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: User registered successfully
+          schema:
+            $ref: '#/definitions/handlers.RegisterResponse'
+        "400":
+          description: Invalid request body or validation error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "409":
+          description: User with this phone number already exists
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      summary: Register a new user
+      tags:
+      - User Authentication
+  /api/v1/available-locations:
+    get:
+      consumes:
+      - application/json
+      description: Fetch all locations from third-party API without filtering by user
+        (admin access only)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Available locations retrieved successfully
+          schema:
+            $ref: '#/definitions/handlers.AvailableLocationsResponse'
+        "401":
+          description: Unauthorized - invalid or missing token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "403":
+          description: Forbidden - requires admin access
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get all available locations in the system
+      tags:
+      - Location Management
+  /api/v1/contacts:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve the application's contact information (public endpoint,
+        no authentication required). Returns empty values if contact information has
+        not been set.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Contact information retrieved successfully
+          schema:
+            $ref: '#/definitions/handlers.ContactResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      summary: Get contact information
+      tags:
+      - Contact Information
+    patch:
+      consumes:
+      - application/json
+      description: Update or create the application's contact information (admin only).
+        Creates a new contact record if one doesn't exist.
+      parameters:
+      - description: Contact information to update
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateContactRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Contact information updated or created successfully
+          schema:
+            $ref: '#/definitions/handlers.ContactResponse'
+        "400":
+          description: Invalid request body or validation error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing admin token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "403":
+          description: Forbidden - admin access required
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update contact information
+      tags:
+      - Contact Information
+  /api/v1/locations:
+    get:
+      consumes:
+      - application/json
+      description: Fetch all locations from third-party API based on user's phone
+        with their gates
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Locations retrieved successfully
+          schema:
+            $ref: '#/definitions/handlers.LocationsListResponse'
+        "401":
+          description: Unauthorized - invalid or missing token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get all locations accessible to the current user
+      tags:
+      - Gate Management
+  /api/v1/locations/{gateId}/close:
+    put:
+      consumes:
+      - application/json
+      description: Send command to close a specific gate to third-party API
+      parameters:
+      - description: Gate ID
+        in: path
+        name: gateId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Gate operation response
+          schema:
+            $ref: '#/definitions/handlers.GateActionResponse'
+        "400":
+          description: Invalid gate ID
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Close a gate
+      tags:
+      - Gate Management
+  /api/v1/locations/{gateId}/open:
+    put:
+      consumes:
+      - application/json
+      description: Send command to open a specific gate to third-party API
+      parameters:
+      - description: Gate ID
+        in: path
+        name: gateId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Gate operation response
+          schema:
+            $ref: '#/definitions/handlers.GateActionResponse'
+        "400":
+          description: Invalid gate ID
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Open a gate
+      tags:
+      - Gate Management
+  /api/v1/locations/{locationId}/gates:
+    get:
+      consumes:
+      - application/json
+      description: Fetch all gates accessible to the current user for a specific location
+        from third-party API
+      parameters:
+      - description: Location ID
+        in: path
+        name: locationId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Gates retrieved successfully
+          schema:
+            $ref: '#/definitions/handlers.GatesListResponse'
+        "400":
+          description: Invalid location ID
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get all gates for a specific location
+      tags:
+      - Gate Management
+  /api/v1/users:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a list of all registered users with pagination and search
+        (requires admin authentication)
+      parameters:
+      - description: 'Page number (default: 1)'
+        in: query
+        name: page
+        type: integer
+      - description: 'Records per page (default: 500)'
+        in: query
+        name: limit
+        type: integer
+      - description: Search by phone number
+        in: query
+        name: search
+        type: string
+      - description: 'Order results by created_at (ASC or DESC, default: DESC)'
+        in: query
+        name: order
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Users retrieved successfully
+          schema:
+            $ref: '#/definitions/handlers.UsersListResponse'
+        "401":
+          description: Unauthorized - invalid or missing admin token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get all users
+      tags:
+      - User Management
+    post:
+      consumes:
+      - application/json
+      description: Create a new user account and assign locations and gates via third-party
+        API (requires admin authentication)
+      parameters:
+      - description: User creation details with locations and gates
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: User created successfully
+          schema:
+            $ref: '#/definitions/handlers.UserResponse'
+        "400":
+          description: Invalid request body or validation error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing admin token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "409":
+          description: User with this phone number already exists
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error or third-party API failure
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Create a new user with location and gate assignment
+      tags:
+      - User Management
+  /api/v1/users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a user account by ID (soft delete, requires admin authentication)
+      parameters:
+      - description: User ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User deleted successfully
+          schema:
+            $ref: '#/definitions/handlers.UserResponse'
+        "400":
+          description: Invalid user ID format
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing admin token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete a user
+      tags:
+      - User Management
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a specific user's details by ID including their assigned
+        locations and gates from third-party API (requires admin authentication)
+      parameters:
+      - description: User ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User retrieved successfully with locations
+          schema:
+            $ref: '#/definitions/handlers.UserDetailResponse'
+        "400":
+          description: Invalid user ID format
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing admin token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get user by ID with assigned locations and gates
+      tags:
+      - User Management
+    patch:
+      consumes:
+      - application/json
+      description: Update a user's password (optional) and reassign locations and
+        gates via third-party API (requires admin authentication)
+      parameters:
+      - description: User ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update details (password optional, locations and gates required)
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User updated successfully
+          schema:
+            $ref: '#/definitions/handlers.UserResponse'
+        "400":
+          description: Invalid user ID or request body
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "401":
+          description: Unauthorized - invalid or missing admin token
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+        "500":
+          description: Internal server error or third-party API failure
+          schema:
+            $ref: '#/definitions/handlers.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update user password and location/gate assignments
+      tags:
+      - User Management
+schemes:
+- http
+- https
+securityDefinitions:
+  BearerAuth:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

@@ -1,0 +1,49 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      target: builder
+    container_name: ololo-gate-app-prod
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env.production
+    depends_on:
+      - db
+    networks:
+      - ololo-network
+    environment:
+      - ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  db:
+    image: postgres:16-alpine
+    container_name: ololo-gate-db-prod
+    env_file:
+      - .env.production
+    volumes:
+      - pgdata_prod:/var/lib/postgresql/data
+    networks:
+      - ololo-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_INITDB_ARGS=-c password_encryption=scram-sha-256
+
+volumes:
+  pgdata_prod:
+
+networks:
+  ololo-network:
+    driver: bridge

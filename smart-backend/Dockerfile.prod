@@ -1,0 +1,45 @@
+# Stage 1: Builder for production
+FROM golang:1.24-alpine AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apk add --no-cache git ca-certificates tzdata
+
+# Copy go mod files
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy source code
+COPY . .
+
+# Build the binary with optimization flags
+RUN CGO_ENABLED=0 GOOS=linux go build \
+    -a \
+    -installsuffix cgo \
+    -ldflags="-w -s" \
+    -o ololo-gate ./cmd/main.go
+
+# Stage 2: Production with minimal image
+FROM gcr.io/distroless/static-debian12
+
+# Install CA certificates for HTTPS
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+
+# Set timezone data
+COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
+
+WORKDIR /
+
+# Copy the binary from builder
+COPY --from=builder /app/ololo-gate /ololo-gate
+
+# Expose port
+EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD ["/ololo-gate", "health"] || exit 1
+
+# Run the binary
+CMD ["/ololo-gate"]

@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "title": "Торгово-развлекательный центр Ала-Тоо",
+    "address": "г. Бишкек, проспект Чуй, 135",
+    "logo": "https://picsum.photos/seed/alatoo/200",
+    "gates": [
+      {
+        "id": 1,
+        "location_id": 1,
+        "title": "Автоматический Шлагбаум №12",
+        "description": "Main vehicle entrance for visitors. Controlled by biometric access, opens in 3 seconds with safety sensors.",
+        "gate_is_horizontal": true,
+        "is_open": true
+      },
+      {
+        "id": 2,
+        "location_id": 1,
+        "title": "Сервисный Шлагбаум №3",
+        "description": "Delivery and maintenance entry, restricted access with remote control.",
+        "gate_is_horizontal": true,
+        "is_open": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Бизнес-парк Ордо",
+    "address": "г. Бишкек, улица Исанова, 98",
+    "logo": "https://picsum.photos/seed/ordo/200",
+    "gates": [
+      {
+        "id": 3,
+        "location_id": 2,
+        "title": "Автоматический Шлагбаум №8",
+        "description": "Main corporate access gate with card-based entry.",
+        "gate_is_horizontal": true,
+        "is_open": true
+      },
+      {
+        "id": 4,
+        "location_id": 2,
+        "title": "Шлагбаум Парковки B2",
+        "description": "Secondary entry point for staff parking area.",
+        "gate_is_horizontal": true,
+        "is_open": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Жилой комплекс Горный Ветер",
+    "address": "г. Бишкек, улица Ахунбаева, 244",
+    "logo": "https://picsum.photos/seed/mountain/200",
+    "gates": [
+      {
+        "id": 5,
+        "location_id": 3,
+        "title": "Автоматический Шлагбаум №2",
+        "description": "Resident-only access with license plate recognition system.",
+        "gate_is_horizontal": true,
+        "is_open": true
+      },
+      {
+        "id": 6,
+        "location_id": 3,
+        "title": "Резервный Шлагбаум №5",
+        "description": "Emergency exit gate with manual override function.",
+        "gate_is_horizontal": true,
+        "is_open": true
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Индустриальная зона Кара-Балта",
+    "address": "г. Кара-Балта, промышленный район, 3А",
+    "logo": "https://picsum.photos/seed/karabalta/200",
+    "gates": [
+      {
+        "id": 7,
+        "location_id": 4,
+        "title": "Автоматический Шлагбаум №18",
+        "description": "Heavy-duty truck gate with RFID access control.",
+        "gate_is_horizontal": true,
+        "is_open": true
+      },
+      {
+        "id": 8,
+        "location_id": 4,
+        "title": "Служебный Шлагбаум №7",
+        "description": "Personnel-only gate, controlled via smart badges.",
+        "gate_is_horizontal": true,
+        "is_open": false
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Парковочный комплекс Аэропорт Манас",
+    "address": "Международный аэропорт Манас, г. Бишкек",
+    "logo": "https://picsum.photos/seed/manas/200",
+    "gates": [
+      {
+        "id": 9,
+        "location_id": 5,
+        "title": "Парковочный Шлагбаум P1",
+        "description": "Primary passenger parking entrance with ticket machine.",
+        "gate_is_horizontal": true,
+        "is_open": true
+      },
+      {
+        "id": 10,
+        "location_id": 5,
+        "title": "Служебный Шлагбаум S4",
+        "description": "Restricted entry for airport staff vehicles only.",
+        "gate_is_horizontal": true,
+        "is_open": false
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Спортивный комплекс Ак-Босого",
+    "address": "г. Бишкек, микрорайон Ак-Босого, улица Суюмбаева, 45",
+    "logo": "https://picsum.photos/seed/akbosogo/200",
+    "gates": [
+      {
+        "id": 11,
+        "location_id": 6,
+        "title": "Шлагбаум №1 Главный вход",
+        "description": "Main gate for athletes and visitors with automatic control.",
+        "gate_is_horizontal": true,
+        "is_open": true
+      },
+      {
+        "id": 12,
+        "location_id": 6,
+        "title": "Шлагбаум №2 Служебный",
+        "description": "Maintenance and service staff access gate.",
+        "gate_is_horizontal": true,
+        "is_open": false
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Автосервисный центр АвтоЛайн",
+    "address": "г. Бишкек, улица Юнусалиева, 11",
+    "logo": "https://picsum.photos/seed/autoline/200",
+    "gates": [
+      {
+        "id": 13,
+        "location_id": 7,
+        "title": "Шлагбаум Прием Клиентов",
+        "description": "Vehicle entry for customer check-in area.",
+        "gate_is_horizontal": true,
+        "is_open": true
+      },
+      {
+        "id": 14,
+        "location_id": 7,
+        "title": "Шлагбаум Техники",
+        "description": "Service-only gate for mechanical bay access.",
+        "gate_is_horizontal": true,
+        "is_open": false
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Отель Плаза Бишкек",
+    "address": "г. Бишкек, улица Тоголок Молдо, 52",
+    "logo": "https://picsum.photos/seed/plaza/200",
+    "gates": [
+      {
+        "id": 15,
+        "location_id": 8,
+        "title": "Шлагбаум Главного Въезда",
+        "description": "Guest and taxi entrance with sensor control.",
+        "gate_is_horizontal": true,
+        "is_open": true
+      },
+      {
+        "id": 16,
+        "location_id": 8,
+        "title": "Служебный Шлагбаум",
+        "description": "Restricted access for hotel personnel only.",
+        "gate_is_horizontal": true,
+        "is_open": false
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Ботанический сад им. Г. Аитиева",
+    "address": "г. Бишкек, проспект Мира, 90",
+    "logo": "https://picsum.photos/seed/botanic/200",
+    "gates": [
+      {
+        "id": 17,
+        "location_id": 9,
+        "title": "Шлагбаум Въезда Посетителей",
+        "description": "Main entry for visitors with time-controlled access.",
+        "gate_is_horizontal": true,
+        "is_open": true
+      },
+      {
+        "id": 18,
+        "location_id": 9,
+        "title": "Шлагбаум Администрации",
+        "description": "Private gate for staff and authorized vehicles.",
+        "gate_is_horizontal": true,
+        "is_open": false
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Торговый центр Азия Молл",
+    "address": "г. Бишкек, проспект Мира, 150",
+    "logo": "https://picsum.photos/seed/asiamall/200",
+    "gates": [
+      {
+        "id": 19,
+        "location_id": 10,
+        "title": "Шлагбаум Парковки P2",
+        "description": "Customer parking entry with contactless payment.",
+        "gate_is_horizontal": true,
+        "is_open": true
+      },
+      {
+        "id": 20,
+        "location_id": 10,
+        "title": "Подземный Шлагбаум P5",
+        "description": "Access to underground parking, staff only.",
+        "gate_is_horizontal": true,
+        "is_open": false
+      }
+    ]
+  }
+]

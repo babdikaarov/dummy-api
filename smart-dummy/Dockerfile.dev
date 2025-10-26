@@ -1,0 +1,28 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install npm and bash (needed for entrypoint script)
+RUN npm install -g npm@latest && apk add --no-cache bash
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Build the app first
+RUN npm run build
+
+# Copy entrypoint script
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
+# Expose port
+EXPOSE 3000
+
+# Start with entrypoint for DB setup
+ENTRYPOINT ["./entrypoint.sh"]

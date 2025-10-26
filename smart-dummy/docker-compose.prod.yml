@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: gates_db_prod
+    env_file:
+      - .env.production
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - gates-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: gates_api_prod
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env.production
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - gates-network
+
+volumes:
+  postgres_prod_data:
+
+networks:
+  gates-network:
+    driver: bridge

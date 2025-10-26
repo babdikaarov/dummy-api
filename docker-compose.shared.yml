@@ -1,0 +1,94 @@
+services:
+  # Smart Dummy Backend (Node.js/NestJS) - Production
+  dummy-api:
+    build:
+      context: ./smart-dummy
+      dockerfile: Dockerfile.prod
+    container_name: dummy-api-prod
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./.env.deploy
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    depends_on:
+      deploy-postgres:
+        condition: service_healthy
+    networks:
+      - backend-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3000/",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Smart Backend (Go) - Production
+  smart-api:
+    build:
+      context: ./smart-backend
+      dockerfile: Dockerfile.prod
+    container_name: smart-api-prod
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./.env.deploy
+    environment:
+      - ENV=production
+      - PORT=8080
+    depends_on:
+      deploy-postgres:
+        condition: service_healthy
+    networks:
+      - backend-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080/",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Shared PostgreSQL Database - Production
+  deploy-postgres:
+    image: postgres:16-alpine
+    container_name: deploy-postgres-prod
+    env_file:
+      - ./.env.deploy
+    ports:
+      - "5435:5432"
+    volumes:
+      - deploy_postgres_prod_data:/var/lib/postgresql/data
+    networks:
+      - backend-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  deploy_postgres_prod_data:
+
+networks:
+  backend-network:
+    driver: bridge
